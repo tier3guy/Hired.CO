@@ -1,3 +1,4 @@
+/* External Imports */
 import {
   TextField,
   Box,
@@ -10,7 +11,7 @@ import {
   Tooltip,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useRef, useState } from "react";
+
 import {
   Person,
   VideocamOff,
@@ -19,8 +20,14 @@ import {
   Videocam,
   ArrowBack,
 } from "@material-ui/icons";
-import useResponsiveSize from "../utils/useResponsiveSize";
+
 import { red } from "@material-ui/core/colors";
+
+/* Built-in Imports */
+import React, { useEffect, useRef, useState } from "react";
+
+/* Internal Imports */
+import useResponsiveSize from "../utils/useResponsiveSize";
 import { MeetingDetailsScreen } from "./MeetingDetailsScreen";
 import { createMeeting, getToken, validateMeeting } from "../api";
 
@@ -62,6 +69,7 @@ export function JoiningScreen({
   webcamOn,
   onClickStartMeeting,
 }) {
+  
   const [readyToJoin, setReadyToJoin] = useState(false);
   const videoPlayerRef = useRef();
   const theme = useTheme();
@@ -77,9 +85,13 @@ export function JoiningScreen({
     xs: 1.5,
   });
 
+
+  // Mic toggling function
   const _handleToggleMic = () => {
     setMicOn(!micOn);
   };
+
+  // Camera toggling function
   const _handleToggleWebcam = () => {
     if (!webcamOn) {
       getVideo();

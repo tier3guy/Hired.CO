@@ -1,95 +1,72 @@
-import { Box, Button, Chip, InputAdornment, TextField } from "@material-ui/core";
-import { Keyboard } from "@material-ui/icons";
+/* Built-in Imports */
 import React, { useState } from "react";
-import useResponsiveSize from "../utils/useResponsiveSize";
 
-export function MeetingDetailsScreen({
-  onClickJoin,
-  onClickCreateMeeting,
-}){
+import Navbar from "./Navbar";
+import svg from "../assets/main-svg.svg";
+
+/* Internal Imports */
+import './CSS/MeetingDetailsScreen.css';
+
+export function MeetingDetailsScreen({ onClickJoin, onClickCreateMeeting }){
+
   const [meetingId, setMeetingId] =useState("");
-  const [meetingIdError, setMeetingIdError] = useState(false);
-  const padding = useResponsiveSize({
-    xl: 6,
-    lg: 6,
-    md: 6,
-    sm: 4,
-    xs: 1.5,
-  });
 
   return (
-        <Box
-          m={6}
-          style={{
-            display: "flex",
-            flex: 1,
-            width: "100%",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: padding,
-          }}>
+        <div className="homeContainer" id="home">
 
-          <Button
-            style={{
-                marginBottom:"1rem"
-            }}
-            color="primary"
-            variant="contained"
-            onClick={(e) => {
-              onClickCreateMeeting();
-            }}>
-            Create Meeting
-          </Button>
+          <Navbar/>
 
-          <Chip label = "OR"/>
+          <section className="container p-0 pt-5 pb-5 d-flex justify-content-between align-items-center">
+        
+          <div className="main-text w-50">
+            <h1 className="font-main font-blue">Premium high quality video sharing platform.</h1>
+            <h5 className="font-main font-light-orange pt-3">
+              Hired.CO is a free interview scheduling video calling application. Hired.CO has a inbuilt draw board support and much more cool features.
+            </h5>
 
-          <TextField
-            fullwidth
-            style={{
-              marginTop: "1rem",
-              width: "100%",
-            }}
-            required
-            id="outlined"
-            label="Meeting ID"
-            helperText={
-              meetingIdError
-                ? "Meeting id is not valid"
-                : "Enter your meeting id Here"
-            }
-            onChange={(e) => {
-              setMeetingId(e.target.value);
-            }}
-            error={meetingIdError}
-            variant="outlined"
-            defaultValue={meetingId}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Keyboard />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Button
-                    disabled={!meetingId.match("\\w{4}\\-\\w{4}\\-\\w{4}")}
-                    color="primary"
-                    variant="contained"
-                    onClick={(e) => {
-                      if (meetingId.match("\\w{4}\\-\\w{4}\\-\\w{4}"))
-                        onClickJoin(meetingId);
-                      else setMeetingIdError(true);
-                    }}
-                    id={"btnJoin"}>
-                    Join
-                  </Button>
-                </InputAdornment>
-              ),
-            }}
-          />
+            <div className="btn-container container p-0">
+              <div className="d-flex align-items-center">
+                {/*<MainButton text="Call Interview" class__="mt-3" func = {() => callUser(idToCall)} />*/}
+                <input 
+                  className="input font-main mt-3 shadow-nones font-barlow ml-0" 
+                  placeholder='Enter the joining code' 
+                  required
+                  onChange={(e) => {
+                    setMeetingId(e.target.value);
+                  }}
+                  value={meetingId}
+                />
+                <button
+                  className="btn btn-primary font-main shadow-none mt-3"
+                  onClick={(e) => onClickJoin(meetingId)}
+                  id={"btnJoin"}>
+                  Join
+                </button>
+              </div>
+              <p className='mt-3 font-blue'>OR</p>
+              <div>
+                <button
+                  className="btn p-0 font-blue create-meeting-btn"
+                  onClick={(e) => {
+                    onClickCreateMeeting();
+                  }}>
+                  Create Meeting
+                </button>
+              </div>
+            </div>
 
+            <hr/>
+
+            <p className="font-barlow font-light-orange">Enter the ID and press enter to call the interview.</p>
+
+          </div>
+
+          <div className="main-img w-50">
+            <img className="" src={svg}/>
+          </div>
+
+        </section>
           
-        </Box>
+        </div>
   );
 }

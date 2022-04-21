@@ -1,15 +1,26 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Lora&family=Noto+Serif&family=Roboto:wght@500&display=swap');
+
+:root{
+
+  /* Font families */
+  --font-main : 'Barlow';
+  --font-roboto : 'Roboto';
+
+  /* Color schemes */
+  --blue : #325d79;
+  --dark-blue : #0c1a24;
+  --sky-blue : #9bd7d1;
+  --white : #efeeee;
+  --light-orange : #f9a26c;
+  --orange : #f26627;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--white);
+  overflow-x: hidden;
 }
 
 div .button {
@@ -476,4 +487,83 @@ div .button {
   -webkit-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.font-main{
+  font-family : var(--font-main);
+}
+
+.font-roboto{
+  font-family : var(--font-roboto);
+}
+
+.font-blue{
+  color: var(--blue);
+}
+
+.font-sky-blue{
+  color: var(--sky-blue);
+}
+
+.font-white{
+  color: var(--white);
+}
+
+.font-light-orange{
+  color: var(--light-orange);
+}
+
+.font-orange{
+  color: var(--orange);
+}
+
+.btn{
+  padding: 14px;
+  font-size: 1.3em;
+}
+
+.btn-secondary{
+  padding: 8px;
+  font-size: 1em;
+}
+
+.btn-primary{
+  background: var(--sky-blue);
+  color: var(--blue);
+}
+
+.btn-primary:hover{
+  background: var(--blue);
+  color: var(--sky-blue);
+}
+
+.btn-primary:focus{
+  background: var(--blue);
+  color: var(--sky-blue);
+}
+
+.btn-primary:active{
+  background: var(--blue);
+  color: var(--sky-blue);
+}
+
+.input{
+  padding: 18px;
+  border: 1px solid var(--orange);
+  border-radius: 5px;
+  margin: 0 0.8em;
+}
+
+.input:focus{
+  outline: none;
+  padding: 17px;
+  border: 2px solid var(--orange);
+}
+
+hr{
+  color: var(--blue);
+  background: var(--blue);
+  margin: 1.5em 0;
 }

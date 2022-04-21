@@ -1,0 +1,5 @@
+.logo{
+  color : var(--orange);
+  border : 2px var(--blue) dashed; 
+  padding : 12px; 
+}

@@ -1,0 +1,7 @@
+.homeContainer{
+  position: absolute;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--white);
+  font-family: var(--font-main);
+}

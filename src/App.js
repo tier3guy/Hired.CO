@@ -1,4 +1,7 @@
+/* Built-in imports */
 import React, { useEffect, useRef, useState } from "react";
+
+/* External Imports */
 import {
   MeetingProvider,
   useMeeting,
@@ -6,6 +9,8 @@ import {
   useConnection,
   usePubSub,
 } from "@videosdk.live/react-sdk";
+
+/* Internal Imports */
 import { getToken } from "./api";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
