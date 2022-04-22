@@ -30,18 +30,9 @@ import React, { useEffect, useRef, useState } from "react";
 import useResponsiveSize from "../utils/useResponsiveSize";
 import { MeetingDetailsScreen } from "./MeetingDetailsScreen";
 import { createMeeting, getToken, validateMeeting } from "../api";
+import './CSS/joiningScreen.css';
 
 const useStyles = makeStyles((theme) => ({
-  video: {
-    borderRadius: "10px",
-    backgroundColor: "#1c1c1c",
-    height: "100%",
-    width: "100%",
-    objectFit: "cover",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
 
   toggleButton: {
     borderRadius: "100%",
@@ -50,31 +41,16 @@ const useStyles = makeStyles((theme) => ({
     height: "44px",
   },
 
-  previewBox: {
-    width: "100%",
-    height: "45vh",
-    position: "relative",
-  },
 }));
 
-export function JoiningScreen({
-  participantName,
-  setParticipantName,
-  meetingId,
-  setMeetingId,
-  setToken,
-  setWebcamOn,
-  setMicOn,
-  micOn,
-  webcamOn,
-  onClickStartMeeting,
-}) {
+export function JoiningScreen({ participantName, setParticipantName, meetingId, setMeetingId, setToken, setWebcamOn, setMicOn, micOn, webcamOn, onClickStartMeeting,}) {
   
   const [readyToJoin, setReadyToJoin] = useState(false);
   const videoPlayerRef = useRef();
   const theme = useTheme();
   const styles = useStyles(theme);
 
+  // Video track state
   const [videoTrack, setVideoTrack] = useState(null);
 
   const padding = useResponsiveSize({
@@ -113,9 +89,7 @@ export function JoiningScreen({
         },
       };
 
-      const stream = await navigator.mediaDevices.getUserMedia(
-        videoConstraints
-      );
+      const stream = await navigator.mediaDevices.getUserMedia( videoConstraints );
       const videoTracks = stream.getVideoTracks();
 
       const videoTrack = videoTracks.length ? videoTracks[0] : null;
@@ -127,6 +101,7 @@ export function JoiningScreen({
     }
   };
 
+  // Camera Effect
   useEffect(() => {
     if (webcamOn && !videoTrack) {
       getVideo();
@@ -134,32 +109,16 @@ export function JoiningScreen({
   }, [webcamOn]);
 
   return (
-    <Box
-      style={{
-        display: "flex",
-        flex: 1,
-        flexDirection: "column",
-        height: "100vh",
-        alignItems: "center",
-        backgroundColor: theme.palette.background.default,
-        padding: padding,
-      }}>
-      {readyToJoin ? (
-        <Box
-          position="absolute"
-          style={{
-            top: theme.spacing(2),
-            right: 0,
-            left: theme.spacing(2),
-          }}>
-          <IconButton
-            onClick={() => {
-              setReadyToJoin(false);
-            }}>
-            <ArrowBack />
-          </IconButton>
-        </Box>
-      ) : null}
+    <div className="joiningSRN" >
+      {
+        readyToJoin ? (
+          <div className="back_btn">
+            <button onClick={() =>  setReadyToJoin(false) } className="btn shadow-none">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+          </div>
+        ) : null
+      }
       <Grid
         item
         xs={12}
@@ -184,15 +143,9 @@ export function JoiningScreen({
               justifyContent: "center",
               padding: padding,
             }}>
-            <Box className={styles.previewBox}>
-              <video
-                autoplay
-                playsInline
-                muted
-                ref={videoPlayerRef}
-                controls={false}
-                className={styles.video + " flip"}
-              />
+            <div className="previewBox">
+
+              <video autoplay playsInline muted ref={videoPlayerRef} controls={false} className="flip video-style" />
 
               {!webcamOn ? (
                 <Box
@@ -264,50 +217,27 @@ export function JoiningScreen({
                   </Grid>
                 </Grid>
               </Box>
-            </Box>
-            <TextField
-              style={{
-                width: "100%",
-                marginTop: "1rem",
-              }}
-              id="outlined"
-              label="Name"
-              helperText={
-                participantName.length < 3
-                  ? "Enter Name with which you would like to join meeting"
-                  : ""
-              }
-              onChange={(e) => {
-                setParticipantName(e.target.value);
-              }}
-              variant="outlined"
-              defaultValue={participantName}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Person />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Button
-                      disabled={participantName.length < 3}
-                      color="primary"
-                      variant="contained"
-                      onClick={(e) => {
-                        if (videoTrack) {
-                          videoTrack.stop();
-                          setVideoTrack(null);
-                        }
-                        onClickStartMeeting();
-                      }}
-                      id={"btnJoin"}>
-                      Start
-                    </Button>
-                  </InputAdornment>
-                ),
-              }}
-            />
+
+            </div>
+
+            <div className="name_container">
+              <input className="input name__input font-main" onChange={ (e) => setParticipantName(e.target.value) }
+                value={participantName}
+                placeholder={"Please, enter your name before joining"}
+              />
+              <button
+                onClick={(e) => {
+                  if (videoTrack) {
+                    videoTrack.stop();
+                    setVideoTrack(null);
+                  }
+                  onClickStartMeeting();
+                }}
+                className="btn shadow-none btn-primary"
+                id={"btnJoin"}>
+                Start
+              </button>
+            </div>
           </Box>
         ) : (
           <MeetingDetailsScreen
@@ -334,6 +264,6 @@ export function JoiningScreen({
           />
         )}
       </Grid>
-    </Box>
+    </div>
   );
 }

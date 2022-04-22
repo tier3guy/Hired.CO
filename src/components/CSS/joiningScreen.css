@@ -1,0 +1,59 @@
+.joiningSRN{
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  color: var(--dark-blue);
+  position: relative;
+  padding: 2em;
+}
+
+.back_btn{
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--dark-blue);
+  font-weight: 300;
+  font-size: 0.8em;
+}
+
+.previewBox{
+  position: relative;
+  height: 60vh;
+  width: 50vw;
+}
+
+.video-style{
+  position: absolute;
+  height: 60vh;
+  width: 50vw;
+  border: 3px solid var(--blue);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: var(--white);
+  object-fit: "cover";
+  display: "flex";
+  align-items: "center";
+  justify-content: "center";
+}
+
+.name_container{
+  margin-top: 2em;
+  width: 50vw;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.name__input{
+  width: 88%;
+  position: absolute;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btnJoin{
+  position: absolute;
+  right: 0;
+}

@@ -46,7 +46,7 @@ export function MeetingDetailsScreen({ onClickJoin, onClickCreateMeeting }){
               <p className='mt-3 font-blue'>OR</p>
               <div>
                 <button
-                  className="btn p-0 font-blue create-meeting-btn"
+                  className="btn p-0 font-blue create-meeting-btn shadow-none"
                   onClick={(e) => {
                     onClickCreateMeeting();
                   }}>
