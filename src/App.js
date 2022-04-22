@@ -113,8 +113,9 @@ const ExternalVideo = () => {
 
 const MessageList = ({ messages }) => {
   return (
-    <div>
-      {messages?.map((message, i) => {
+    <div className="message-list">
+      {
+        messages?.map((message, i) => {
         const { senderName, message: text, timestamp } = message;
 
         return (
@@ -144,10 +145,11 @@ const MessageList = ({ messages }) => {
               {formatAMPM(new Date(timestamp))}
             </p>
           </div>
-        );
-      })}
+          );
+        })
+      }
     </div>
-  );
+  )
 };
 
 
@@ -319,8 +321,10 @@ const ParticipantView = ({ participantId }) => {
           position: "relative",
           overflow: "hidden",
           backgroundColor: "pink",
-          width: "50%",
-          height: 300,
+          width: "100%",
+          height: 400,
+          border: "2px solid var(--orange)",
+          boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
         }}
       >
         <div
@@ -416,10 +420,11 @@ const ParticipantView = ({ participantId }) => {
           backgroundColor: "lightgreen",
           width: "100%",
           height: 300,
+          borderRadius: 0
         }}
       >
         <div
-          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
+          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, borderRadius: 0, border: "2px solid var(--orange)", }}
         >
           <video
             height={"100%"}
@@ -472,7 +477,6 @@ const ParticipantsView = () => {
         padding: borderRadius,
       }}
     >
-      <Title dark title={"Participants"} />
       {chunk([...participants.keys()]).map((k) => (
         <div style={{ display: "flex" }}>
           {k.map((l) => (
@@ -601,6 +605,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
     muteMic,
     unmuteMic,
     toggleMic,
+
     //
     disableWebcam,
     enableWebcam,
@@ -697,10 +702,10 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
         
         <div className="ml-5 mr-5 d-flex justify-content-between align-items-center">
           <button className={"button blue btn-controller"} onClick={toggleMic}>
-            <i class="fa-solid fa-microphone"></i>
+            { localMicOn ? <i class="fa-solid fa-microphone"></i> : <i class="fa-solid fa-microphone-slash"></i>} 
           </button>
           <button className={"button blue btn-controller"} onClick={toggleWebcam}>
-            <i class="fa-solid fa-video"></i>
+            { localWebcamOn ? <i class="fa-solid fa-video"></i> : <i class="fa-solid fa-video-slash"></i> }
           </button>
           <button className={"button blue btn-controller"} onClick={toggleScreenShare}>
             <i class="fa-solid fa-arrow-up-from-bracket"></i>
@@ -747,7 +752,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
       </div>
 
 
-      <h1 className="font-main font-blue">Meeting id is : <span className="font-main font-orange">{meetingId}</span></h1>
+      <h4 className="m-4 font-main font-blue">Meeting id is : <span className="font-main font-orange">{meetingId}</span></h4>
       <div style={{ display: "flex", flex: 1 }}>
         <div
           style={{
@@ -756,7 +761,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
             position: "relative",
             flex: 1,
             overflowY: "scroll",
-            height: `calc(100vh - ${tollbarHeight}px)`,
+            height: '65vh',
           }}
         >
           <ExternalVideo />

@@ -11,12 +11,11 @@
   position: absolute;
   bottom: 0;
   z-index: 5000;
-  background: var(--dark-blue);
+  background: transparent;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1em;
 }
 
 
@@ -38,3 +37,6 @@
   background: var(--blue);
 }
 
+::-webkit-scrollbar{
+  display: none;
+}
