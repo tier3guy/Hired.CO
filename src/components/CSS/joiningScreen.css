@@ -53,7 +53,7 @@
   justify-content: center;
 }
 
-#btnJoin{
+.startbtn{
   position: absolute;
   right: 0;
 }

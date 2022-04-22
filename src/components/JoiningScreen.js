@@ -1,24 +1,19 @@
 /* External Imports */
 import {
-  TextField,
   Box,
   Button,
-  InputAdornment,
   useTheme,
   Grid,
   makeStyles,
-  IconButton,
   Tooltip,
   Typography,
 } from "@material-ui/core";
 
 import {
-  Person,
   VideocamOff,
   MicOff,
   Mic,
   Videocam,
-  ArrowBack,
 } from "@material-ui/icons";
 
 import { red } from "@material-ui/core/colors";
@@ -233,7 +228,7 @@ export function JoiningScreen({ participantName, setParticipantName, meetingId, 
                   }
                   onClickStartMeeting();
                 }}
-                className="btn shadow-none btn-primary"
+                className="btn shadow-none btn-primary startbtn"
                 id={"btnJoin"}>
                 Start
               </button>
