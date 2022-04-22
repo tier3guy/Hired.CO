@@ -1,0 +1,40 @@
+.main-meeting-container{
+  background: var(--dark-blue);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.controllers{
+  position: absolute;
+  bottom: 0;
+  z-index: 5000;
+  background: var(--dark-blue);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+
+.btn-controller{
+  margin: 0 10px;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 15px;
+  background: var(--light-orange);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.btn-controller:hover{
+  background: var(--blue);
+}
+

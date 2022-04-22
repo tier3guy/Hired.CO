@@ -15,6 +15,7 @@ import { getToken } from "./api";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { JoiningScreen } from "./components/JoiningScreen";
+import './App.css';
 
 const primary = "#3E84F6";
 
@@ -40,8 +41,9 @@ function formatAMPM(date) {
 }
 
 const Title = ({ title, dark }) => {
-  return <h2 style={{ color: dark ? primary : "#fff" }}>{title}</h2>;
+  return <h2 style={{color : "var(--orange)"}}>{title}</h2>;
 };
+
 
 const ExternalVideo = () => {
   const [{ link, playing }, setVideoInfo] = useState({
@@ -118,16 +120,16 @@ const MessageList = ({ messages }) => {
         return (
           <div
             style={{
-              margin: 8,
-              backgroundColor: "darkblue",
-              borderRadius: 8,
+              marginTop: "10px",
+              backgroundColor: "var(--light-orange)",
               overflow: "hidden",
               padding: 8,
-              color: "#fff",
+              color: "var(--dark-blue)",
+              border: "1px solid var(--orange)"
             }}
             key={i}
           >
-            <p style={{ margin: 0, padding: 0, fontStyle: "italic" }}>
+            <p style={{ margin: 0, padding: 0}}>
               {senderName}
             </p>
             <h3 style={{ margin: 0, padding: 0, marginTop: 4 }}>{text}</h3>
@@ -148,25 +150,34 @@ const MessageList = ({ messages }) => {
   );
 };
 
+
 const MeetingChat = ({ tollbarHeight }) => {
   const { publish, messages } = usePubSub("CHAT", {});
   const [message, setMessage] = useState("");
   return (
     <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
       style={{
         marginLeft: borderRadius,
         width: 400,
-        backgroundColor: primary,
+        color: "var(--dark-blue)",
+        fontFamily: "var(--font-main)",
+        backgroundColor: "var(--white)",
         overflowY: "scroll",
-        borderRadius,
-        height: `calc(100vh - ${tollbarHeight + 2 * borderRadius}px)`,
-        padding: borderRadius,
+        height: "100vh",
+        padding: "1.2em",
+        zIndex : 100000,
       }}
     >
-      <Title title={"Chat"} />
+      <Title title={"Chat Box"} dark={"var(--orange)"} />
 
       <div style={{ display: "flex" }}>
         <input
+          style={{
+            borderRadius: "0",
+          }}
+          className = "input m-0 p-2 mr-2 w-75"
           value={message}
           onChange={(e) => {
             const v = e.target.value;
@@ -174,7 +185,15 @@ const MeetingChat = ({ tollbarHeight }) => {
           }}
         />
         <button
-          className={"button default"}
+          style={{
+            fontSize: "20px",
+            padding: "20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: "300"
+          }}
+          className={"button default btn shadow-none m-0 w-25"}
           onClick={() => {
             const m = message;
 
@@ -284,8 +303,6 @@ const ParticipantView = ({ participantId }) => {
     <div
       style={{
         width,
-        backgroundColor: primary,
-        borderRadius: borderRadius,
         overflow: "hidden",
         margin: borderRadius,
         padding: borderRadius,
@@ -300,10 +317,9 @@ const ParticipantView = ({ participantId }) => {
       <div
         style={{
           position: "relative",
-          borderRadius: borderRadius,
           overflow: "hidden",
           backgroundColor: "pink",
-          width: "100%",
+          width: "50%",
           height: 300,
         }}
       >
@@ -328,22 +344,26 @@ const ParticipantView = ({ participantId }) => {
           <div
             style={{
               position: "absolute",
-              top: borderRadius,
-              right: borderRadius,
+              right: 0,
+              bottom: 0
             }}
           >
             <p
               style={{
-                color: webcamOn ? "green" : "red",
-                fontSize: 16,
-                fontWeight: "bold",
+                color: webcamOn ? "var(--white)" : "red",
+                fontSize: 20,
                 opacity: 1,
+                fontFamily: "var(--font-main)",
+                background: "var(--orange)",
+                padding: 12,
+                borderRadius: "15px 0 0 15px"
               }}
             >
-              WEB CAM
+              {displayName}
             </p>
           </div>
 
+          {/* 
           <div
             style={{
               position: "absolute",
@@ -382,6 +402,8 @@ const ParticipantView = ({ participantId }) => {
               Switch Participant
             </button>
           </div>
+          */}
+          
         </div>
       </div>
 
@@ -434,26 +456,6 @@ const ParticipantView = ({ participantId }) => {
           </div>
         </div>
       </div>
-      <table>
-        {[
-          { k: "Name", v: displayName },
-          { k: "webcamOn", v: webcamOn ? "YES" : "NO" },
-          { k: "micOn", v: micOn ? "YES" : "NO" },
-          { k: "screenShareOn", v: screenShareOn ? "YES" : "NO" },
-          { k: "isLocal", v: isLocal ? "YES" : "NO" },
-          { k: "isActiveSpeaker", v: isActiveSpeaker ? "YES" : "NO" },
-          { k: "isMainParticipant", v: isMainParticipant ? "YES" : "NO" },
-        ].map(({ k, v }) => (
-          <tr key={k}>
-            <td style={{ border: "1px solid #fff", padding: 4 }}>
-              <h3 style={{ margin: 0, padding: 0, color: "#fff" }}>{k}</h3>
-            </td>
-            <td style={{ border: "1px solid #fff", padding: 4 }}>
-              <h3 style={{ margin: 0, padding: 0, color: "#fff" }}>{v}</h3>
-            </td>
-          </tr>
-        ))}
-      </table>
     </div>
   );
 };
@@ -482,131 +484,7 @@ const ParticipantsView = () => {
   );
 };
 
-const ConnectionView = ({ connectionId }) => {
-  const { connection } = useConnection(connectionId, {
-    onMeeting: {
-      onChatMessage: ({ message, participantId }) => {
-        alert(
-          `A Person ${participantId} from ${connectionId} Wants to say : ${message}`
-        );
-      },
-    },
-  });
-
-  const connectionParticipants = [...connection.meeting.participants.values()];
-
-  const ConnectionParticipant = ({ participant }) => {
-    return (
-      <div style={{ padding: 4, border: "1px solid blue" }}>
-        <p>{participant.displayName}</p>
-        <button
-          onClick={async () => {
-            const meetingId = prompt(
-              `In Which meetingId you want to switch ${participant.displayName} ?`
-            );
-            const payload = prompt("enter payload you want to pass");
-
-            const token = await getToken();
-            if ((meetingId, token, payload)) {
-              participant
-                .switchTo({ meetingId, token, payload })
-                .catch(console.log);
-            } else {
-              alert("Empty meetingId or payload ");
-            }
-          }}
-          className={"button "}
-        >
-          Switch
-        </button>
-      </div>
-    );
-  };
-
-  return (
-    <div
-      style={{
-        width,
-        backgroundColor: primary,
-        borderRadius: borderRadius,
-        overflow: "hidden",
-        margin: borderRadius,
-        padding: borderRadius,
-        display: "flex",
-        flex: 1,
-        flexDirection: "column",
-        position: "relative",
-      }}
-    >
-      <button
-        onClick={() => {
-          connection.close();
-        }}
-        className={"button"}
-      >
-        Close Connection
-      </button>
-
-      <button
-        onClick={() => {
-          const message = prompt("Enter You Message");
-          if (message) {
-            connection.meeting.sendChatMessage(message);
-          } else {
-            alert("Empty Message ");
-          }
-        }}
-        className={"button"}
-      >
-        Send Meessage
-      </button>
-
-      <button
-        onClick={() => {
-          connection.meeting.end();
-        }}
-        className={"button"}
-      >
-        End Meeting
-      </button>
-      <p>
-        {connection.id} : {connection.payload}
-      </p>
-      {connectionParticipants.map((participant) => {
-        return (
-          <ConnectionParticipant
-            key={`${connection.id}_${participant.id}`}
-            participant={participant}
-          />
-        );
-      })}
-    </div>
-  );
-};
-
-const ConnectionsView = () => {
-  const { connections, meetingId } = useMeeting();
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        flexDirection: "column",
-        padding: borderRadius,
-      }}
-    >
-      <Title dark title={"Connections"} />
-      {chunk([...connections.keys()]).map((k) => (
-        <div style={{ display: "flex" }} key={k}>
-          {k.map((l) => (
-            <ConnectionView key={`${meetingId}_${l}`} connectionId={l} />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-};
-
+// Upper buttons
 function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
   const [participantViewVisible, setParticipantViewVisible] = useState(true);
 
@@ -808,26 +686,34 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
   const tollbarHeight = 120;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "#D6E9FE",
-      }}
-    >
-      <div style={{ height: tollbarHeight }}>
-        <button className={"button red"} onClick={leave}>
-          LEAVE
+    <div className="main-meeting-container" >
+
+
+      <div style={{ height: tollbarHeight }} className="controllers">
+
+        <button className={"button red btn-controller"} onClick={leave}>
+          <i class="fa-solid fa-phone"></i>
         </button>
-        <button className={"button blue"} onClick={toggleMic}>
-          toggleMic
+        
+        <div className="ml-5 mr-5 d-flex justify-content-between align-items-center">
+          <button className={"button blue btn-controller"} onClick={toggleMic}>
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+          <button className={"button blue btn-controller"} onClick={toggleWebcam}>
+            <i class="fa-solid fa-video"></i>
+          </button>
+          <button className={"button blue btn-controller"} onClick={toggleScreenShare}>
+            <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          </button>
+        </div>
+
+        <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+          <i class="fa-solid fa-message"></i>
         </button>
-        <button className={"button blue"} onClick={toggleWebcam}>
-          toggleWebcam
-        </button>
-        <button className={"button blue"} onClick={toggleScreenShare}>
-          toggleScreenShare
-        </button>
+
+        {/* 
+
+
         <button className={"button blue"} onClick={handlestartVideo}>
           startVideo
         </button>
@@ -855,38 +741,13 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
         <button className={"button blue"} onClick={handleStopRecording}>
           stop recording
         </button>
-        <button
-          className={"button blue"}
-          onClick={() => setParticipantViewVisible((s) => !s)}
-        >
-          Switch to {participantViewVisible ? "Connections" : "Participants"}{" "}
-          view
-        </button>
 
-        <button
-          className={"button blue"}
-          onClick={async () => {
-            const meetingId = prompt(
-              `Please enter meeting id where you want Connect`
-            );
-            if (meetingId) {
-              try {
-                await connectTo({
-                  meetingId,
-                  payload: "This is Testing Payload",
-                });
-              } catch (e) {
-                console.log("Connect to Error", e);
-              }
-            } else {
-              alert("Empty meetingId!");
-            }
-          }}
-        >
-          Make Connections
-        </button>
+        */}
+
       </div>
-      <h1>Meeting id is : {meetingId}</h1>
+
+
+      <h1 className="font-main font-blue">Meeting id is : <span className="font-main font-orange">{meetingId}</span></h1>
       <div style={{ display: "flex", flex: 1 }}>
         <div
           style={{
@@ -899,8 +760,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
           }}
         >
           <ExternalVideo />
-          {/* <ParticipantsView /> */}
-          {participantViewVisible ? <ParticipantsView /> : <ConnectionsView />}
+          <ParticipantsView />
         </div>
         <MeetingChat tollbarHeight={tollbarHeight} />
       </div>

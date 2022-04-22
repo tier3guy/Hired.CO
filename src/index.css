@@ -567,3 +567,27 @@ hr{
   background: var(--blue);
   margin: 1.5em 0;
 }
+
+
+.fa-phone{
+  transform: rotate(135deg);
+}
+
+.phone{
+  background: var(--orange);
+  border-radius: 25px;
+  width: 4.55em;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  margin: 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  color: var(--white) !important;
+}
+
+.phone:hover{
+  background: var(--light-orange);
+  color: var(--orange);
+}
