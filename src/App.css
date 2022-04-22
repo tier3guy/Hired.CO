@@ -40,3 +40,11 @@
 ::-webkit-scrollbar{
   display: none;
 }
+
+#meetIDCopy{
+  cursor: pointer;
+}
+
+#meetIDCopy:hover{
+  text-decoration: underline;
+}

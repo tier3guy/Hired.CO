@@ -688,6 +688,11 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
     stopRecording();
   };
 
+
+  const copyToClipboard = (e) => {
+    navigator.clipboard.writeText(e.target.innerHTML);
+  }
+
   const tollbarHeight = 120;
 
   return (
@@ -752,7 +757,12 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
       </div>
 
 
-      <h4 className="m-4 font-main font-blue">Meeting id is : <span className="font-main font-orange">{meetingId}</span></h4>
+      <h4 className="m-4 font-main font-blue">Meeting id is : <span 
+      onClick={(e) => copyToClipboard(e) } 
+      data-toggle="tooltip" 
+      title="Click to Copy" 
+      className="font-main font-orange" 
+      id="meetIDCopy">{meetingId}</span></h4>
       <div style={{ display: "flex", flex: 1 }}>
         <div
           style={{
