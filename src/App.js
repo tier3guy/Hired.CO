@@ -316,7 +316,60 @@ const ParticipantView = ({ participantId }) => {
     >
       <audio ref={micRef} autoPlay muted={isLocal} />
 
-      <div
+      {
+        screenShareOn ? 
+        <div
+          style={{
+            position: "relative",
+            borderRadius: borderRadius,
+            overflow: "hidden",
+            backgroundColor: "lightgreen",
+            width: "100%",
+            height: 400,
+            borderRadius: 0
+          }}
+        >
+          <div
+            style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, borderRadius: 0, border: "2px solid var(--orange)", }}
+          >
+            <video
+              height={"100%"}
+              width={"100%"}
+              ref={screenShareRef}
+              style={{
+                backgroundColor: "black",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                objectFit: "contain",
+              }}
+              autoPlay
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+              }}
+            >
+              <p
+                className="font-main p-2 m-0"
+                style={{
+                  background: "var(--orange)",
+                  color: screenShareOn ? "var(--white)" : "red",
+                  fontSize: 16,
+                  opacity: 1,
+                }}
+              >
+                {`${displayName}'s screen`}
+              </p>
+            </div>
+          </div>
+        </div>
+        :
+        <div
         style={{
           position: "relative",
           overflow: "hidden",
@@ -366,101 +419,10 @@ const ParticipantView = ({ participantId }) => {
               {displayName}
             </p>
           </div>
-
-          {/* 
-          <div
-            style={{
-              position: "absolute",
-              top: 10,
-              left: 10,
-            }}
-          >
-            <button
-              className="button blue"
-              style={
-                {
-                  // height: 50,
-                  // width: 200,
-                }
-              }
-              onClick={async () => {
-                const meetingId = prompt(
-                  `Please enter meeting id where you want to switch ${displayName}`
-                );
-                const token = await getToken();
-                if (meetingId && token) {
-                  try {
-                    await switchTo({
-                      meetingId,
-                      payload: "Im Switching",
-                      token: token,
-                    });
-                  } catch (e) {
-                    console.log("swithc To Error", e);
-                  }
-                } else {
-                  alert("Empty meetingId!");
-                }
-              }}
-            >
-              Switch Participant
-            </button>
-          </div>
-          */}
-          
         </div>
       </div>
+      }
 
-      <div
-        style={{
-          marginTop: borderRadius,
-          position: "relative",
-          borderRadius: borderRadius,
-          overflow: "hidden",
-          backgroundColor: "lightgreen",
-          width: "100%",
-          height: 300,
-          borderRadius: 0
-        }}
-      >
-        <div
-          style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, borderRadius: 0, border: "2px solid var(--orange)", }}
-        >
-          <video
-            height={"100%"}
-            width={"100%"}
-            ref={screenShareRef}
-            style={{
-              backgroundColor: "black",
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              objectFit: "contain",
-            }}
-            autoPlay
-          />
-          <div
-            style={{
-              position: "absolute",
-              top: borderRadius,
-              right: borderRadius,
-            }}
-          >
-            <p
-              style={{
-                color: screenShareOn ? "green" : "red",
-                fontSize: 16,
-                fontWeight: "bold",
-                opacity: 1,
-              }}
-            >
-              SCREEN SHARING
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
@@ -770,7 +732,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
             flexDirection: "column",
             position: "relative",
             flex: 1,
-            overflowY: "scroll",
+            overflowY: "hidden",
             height: '65vh',
           }}
         >
