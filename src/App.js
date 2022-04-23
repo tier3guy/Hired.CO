@@ -655,6 +655,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
     navigator.clipboard.writeText(e.target.innerHTML);
   }
 
+  
   const tollbarHeight = 120;
 
   return (
