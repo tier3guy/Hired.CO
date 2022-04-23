@@ -15,6 +15,7 @@ import { getToken } from "./api";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { JoiningScreen } from "./components/JoiningScreen";
+import { CodeEditor } from "./components/CodeEditor";
 import './App.css';
 
 const primary = "#3E84F6";
@@ -159,7 +160,7 @@ const MeetingChat = ({ tollbarHeight }) => {
   return (
     <div
       class="offcanvas offcanvas-end"
-      tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel"
+      tabindex="-1" id="chatBox" aria-labelledby="offcanvasRightLabel"
       style={{
         marginLeft: borderRadius,
         width: 400,
@@ -497,14 +498,12 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
   const onLiveStreamStopped = (data) => {
     console.log("onLiveStreamStopped example", data);
   };
-
   const onVideoStateChanged = (data) => {
     console.log("onVideoStateChanged", data);
   };
   const onVideoSeeked = (data) => {
     console.log("onVideoSeeked", data);
   };
-
   const onWebcamRequested = (data) => {
     console.log("onWebcamRequested", data);
   };
@@ -533,7 +532,6 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
       ],
     });
   };
-
   const onConnectionOpen = (data) => {
     console.log("onConnectionOpen", data);
   };
@@ -589,29 +587,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
     seekVideo,
     startLivestream,
     stopLivestream,
-  } = useMeeting({
-    onParticipantJoined,
-    onParticipantLeft,
-    onSpeakerChanged,
-    onPresenterChanged,
-    onMainParticipantChanged,
-    onEntryRequested,
-    onEntryResponded,
-    onRecordingStarted,
-    onRecordingStopped,
-    onChatMessage,
-    onMeetingJoined,
-    onMeetingLeft,
-    onLiveStreamStarted,
-    onLiveStreamStopped,
-    onVideoStateChanged,
-    onVideoSeeked,
-    onWebcamRequested,
-    onMicRequested,
-    onPinStateChanged,
-    onSwitchMeeting,
-    onConnectionOpen,
-  });
+  } = useMeeting({ onParticipantJoined, onParticipantLeft, onSpeakerChanged, onPresenterChanged, onMainParticipantChanged, onEntryRequested, onEntryResponded, onRecordingStarted, onRecordingStopped, onChatMessage, onMeetingJoined, onMeetingLeft, onLiveStreamStarted, onLiveStreamStopped, onVideoStateChanged, onVideoSeeked, onWebcamRequested, onMicRequested, onPinStateChanged, onSwitchMeeting, onConnectionOpen });
 
   const handlestartVideo = () => {
     console.log("handlestartVideo");
@@ -678,9 +654,12 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
           <button className={"button blue btn-controller"} onClick={toggleScreenShare}>
             <i class="fa-solid fa-arrow-up-from-bracket"></i>
           </button>
+          <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#codeEditor" aria-controls="offcanvasTop">
+            <i class="fa-solid fa-code"></i>
+          </button>
         </div>
 
-        <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#chatBox" aria-controls="offcanvasRight">
           <i class="fa-solid fa-message"></i>
         </button>
 
@@ -727,6 +706,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
       className="font-main font-orange" 
       id="meetIDCopy">{meetingId}</span></h4>
       <div style={{ display: "flex", flex: 1 }}>
+        <CodeEditor/>
         <div
           style={{
             display: "flex",
