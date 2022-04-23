@@ -16,6 +16,7 @@ import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { JoiningScreen } from "./components/JoiningScreen";
 import { CodeEditor } from "./components/CodeEditor";
+import { DrawBoard } from "./components/DrawBoard";
 import './App.css';
 
 const primary = "#3E84F6";
@@ -657,6 +658,9 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
           <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#codeEditor" aria-controls="offcanvasTop">
             <i class="fa-solid fa-code"></i>
           </button>
+          <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#drawborad-container" aria-controls="offcanvasTop">
+            <i class="fa-solid fa-pencil"></i>
+          </button>
         </div>
 
         <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#chatBox" aria-controls="offcanvasRight">
@@ -707,6 +711,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
       id="meetIDCopy">{meetingId}</span></h4>
       <div style={{ display: "flex", flex: 1 }}>
         <CodeEditor/>
+        <DrawBoard/>
         <div
           style={{
             display: "flex",

@@ -1,4 +1,4 @@
-.codeEditor-container{
+#drawborad-container{
   width: 75vw;
   height: 80vh;
   position: absolute;
@@ -8,8 +8,6 @@
   color: var(--orange);
 }
 
- 
-#editor{
-  margin-top: -80px !important;
+#board{
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
