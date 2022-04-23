@@ -1,5 +1,5 @@
 /* Built-in imports */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useFullscreenStatus } from "react";
 
 /* External Imports */
 import {
@@ -658,7 +658,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
   const tollbarHeight = 120;
 
   return (
-    <div className="main-meeting-container" >
+    <div className="main-meeting-container">
 
 
       <div style={{ height: tollbarHeight }} className="controllers">
