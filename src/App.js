@@ -10,6 +10,8 @@ import {
   usePubSub,
 } from "@videosdk.live/react-sdk";
 
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
+
 /* Internal Imports */
 import { getToken } from "./api";
 import { confirmAlert } from "react-confirm-alert"; // Import
@@ -631,13 +633,11 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
   const copyToClipboard = (e) => {
     navigator.clipboard.writeText(e.target.innerHTML);
   }
-
   
   const tollbarHeight = 120;
 
   return (
     <div className="main-meeting-container">
-
 
       <div style={{ height: tollbarHeight }} className="controllers">
 
@@ -740,31 +740,32 @@ const App = () => {
   const [isMeetingStarted, setMeetingStarted] = useState(false);
 
   return isMeetingStarted ? (
-    <MeetingProvider
-      config={{
-        meetingId,
-        micEnabled: micOn,
-        webcamEnabled: webcamOn,
-        name: participantName ? participantName : "TestUser",
-      }}
-      token={token}
-      reinitialiseMeetingOnConfigChange={true}
-      joinWithoutUserInteraction={true}
-    >
-      <MeetingView
-        onNewMeetingIdToken={({ meetingId, token }) => {
-          setMeetingId(meetingId);
-          setToken(token);
+      <MeetingProvider
+        config={{
+          meetingId,
+          micEnabled: micOn,
+          webcamEnabled: webcamOn,
+          name: participantName ? participantName : "TestUser",
         }}
-        onMeetingLeave={() => {
-          setToken("");
-          setMeetingId("");
-          setWebcamOn(false);
-          setMicOn(false);
-          setMeetingStarted(false);
-        }}
-      />
-    </MeetingProvider>
+        token={token}
+        reinitialiseMeetingOnConfigChange={true}
+        joinWithoutUserInteraction={true}
+      >
+        
+        <MeetingView
+          onNewMeetingIdToken={({ meetingId, token }) => {
+            setMeetingId(meetingId);
+            setToken(token);
+          }}
+          onMeetingLeave={() => {
+            setToken("");
+            setMeetingId("");
+            setWebcamOn(false);
+            setMicOn(false);
+            setMeetingStarted(false);
+          }}
+        />
+      </MeetingProvider>
   ) : (
     <JoiningScreen
       participantName={participantName}
