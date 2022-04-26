@@ -14,3 +14,10 @@
   margin : 0 12px;
   color: var(--sky-blue);
 }
+
+
+@media screen and (max-width: 1000px ){
+  .navbar{
+    padding: 1em 3em !important;
+  }
+}

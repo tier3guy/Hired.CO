@@ -57,3 +57,29 @@
   position: absolute;
   right: 0;
 }
+
+@media screen and (max-width: 1000px) {
+  
+  .previewBox{
+    width: 80vw;
+  }
+  
+  .video-style{
+    width: 80vw;
+  }
+
+  .name_container{
+    width: 80vw;
+    position: relative;
+  }
+
+  .name__input{
+    width: 100%;
+  }
+
+  .startbtn{
+    position: absolute;
+    width: 100%;
+    margin: 4em 0;
+  }
+}

@@ -5,3 +5,40 @@
   background: var(--white);
   font-family: var(--font-main);
 }
+
+@media screen and (max-width: 1000px ){
+
+  .homeContainer{
+    overflow-y: scroll;
+    width: 100vw;
+  }
+
+  .homeSection{
+    flex-direction: column-reverse;
+  } 
+
+  .svg{
+    margin-left: -5em !important;
+    height: 60vh;
+  }
+
+  .main-text{
+    margin-top: 5em;
+    width: 100% !important;
+    padding: 3em;
+  }
+}
+
+@media screen and (max-width: 400px ){
+  .svg{
+    margin-top: 4em;
+    margin-left: -5em !important;
+    height: 50vh;
+  }
+
+  .main-text{
+    margin-top: 5em;
+    width: 100% !important;
+    padding: 3em;
+  }
+}
