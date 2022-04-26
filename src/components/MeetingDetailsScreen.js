@@ -16,7 +16,7 @@ export function MeetingDetailsScreen({ onClickJoin, onClickCreateMeeting }){
 
           <Navbar/>
 
-          <section className="container p-0 pt-5 pb-5 d-flex justify-content-between align-items-center">
+          <section className="container p-0 pt-5 pb-5 d-flex justify-content-between align-items-center homeSection">
         
           <div className="main-text w-50">
             <h1 className="font-main font-blue">Premium high quality video sharing platform.</h1>
@@ -62,7 +62,7 @@ export function MeetingDetailsScreen({ onClickJoin, onClickCreateMeeting }){
           </div>
 
           <div className="main-img w-50">
-            <img className="" src={svg}/>
+            <img className="svg" src={svg}/>
           </div>
 
         </section>
