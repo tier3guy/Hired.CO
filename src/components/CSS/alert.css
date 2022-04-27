@@ -1,0 +1,10 @@
+.alert-link{
+  background: #f2672781;
+  border: 1px solid #f26727;
+  color: white;
+  font-weight: 400;
+  font-family: var(--font-main);
+  text-align: center;
+  width: 200px;
+  margin: 0 auto;
+}

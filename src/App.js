@@ -19,6 +19,7 @@ import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { JoiningScreen } from "./components/JoiningScreen";
 import { CodeEditor } from "./components/CodeEditor";
 import { DrawBoard } from "./components/DrawBoard";
+import AlertCopy from './components/alertCopy';
 import './App.css';
 
 const primary = "#3E84F6";
@@ -704,11 +705,13 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
 
 
       <h4 className="m-4 font-main font-blue">Meeting id is : <span 
-      onClick={(e) => copyToClipboard(e) } 
-      data-toggle="tooltip" 
+      onClick={(e) => copyToClipboard(e) }
+      data-toggle="modal" 
+      data-target=".bd-example-modal-sm" 
       title="Click to Copy" 
       className="font-main font-orange" 
       id="meetIDCopy">{meetingId}</span></h4>
+      <AlertCopy/>
       <div style={{ display: "flex", flex: 1 }}>
         <CodeEditor/>
         <DrawBoard/>
