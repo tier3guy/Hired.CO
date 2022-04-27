@@ -11,15 +11,14 @@ const About = () => {
           <div class="modal-body">
 
             <p className="font-main font-blue">
-            Hired.CO is an online platform for both interviewers and interviewees for there smooth interviews process. The platform is build on a hackthon Technex'22 under open invocation's track. The team was Syntax Error who had build this platform. The flatform includes an in-built draw board and messaging center. We are also looking for upper versions of this platform in each we are also targeting to give a in-built code editor and screen sharing experience. 
-            </p>
+            Hired.CO is an online platform for both interviewers and interviewees for there smooth interviews process. The platform is build on a project Exhibition of Narula Institute of Technology under Idea-o-meter track. The team, Syntax Error and the team lead Avinash had build this platform with lots of pashion. The flatform includes an in-built draw board and messaging center. We are also looking for upper versions of this platform in each we are also targeting to give a in-built code editor and screen sharing experience.</p>
 
             <p className="font-main font-blue">
-            Also we would love to give thank to Technex team for having this wonderful hackthon and because of them the website is live now.
+            Also we would love to give thank to the management team of KRITANJ for having this wonderful idea-o-meter program and because of them the website is live now.
             </p>
 
             <p className="font-main font-orange">
-            ~ ❤️ from Team Lead Avinash Gupta <a href="">(LinkedIn)</a>
+            ~ ❤️ from Team Lead Avinash Gupta <a href="https://www.linkedin.com/in/avinash-gupta-3321041ba/">(LinkedIn)</a>
             </p>
 
           </div>
