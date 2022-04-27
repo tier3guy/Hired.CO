@@ -10,7 +10,7 @@ import {
   usePubSub,
 } from "@videosdk.live/react-sdk";
 
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
+import PageVisibility from 'react-page-visibility';
 
 /* Internal Imports */
 import { getToken } from "./api";
@@ -33,7 +33,6 @@ const chunk = (arr) => {
   while (arr.length) newArr.push(arr.splice(0, 3));
   return newArr;
 };
-
 function formatAMPM(date) {
   var hours = date.getHours();
   var minutes = date.getMinutes();
@@ -44,12 +43,9 @@ function formatAMPM(date) {
   var strTime = hours + ":" + minutes + " " + ampm;
   return strTime;
 }
-
 const Title = ({ title, dark }) => {
   return <h2 style={{color : "var(--orange)"}}>{title}</h2>;
 };
-
-
 const ExternalVideo = () => {
   const [{ link, playing }, setVideoInfo] = useState({
     link: null,
@@ -115,7 +111,6 @@ const ExternalVideo = () => {
     </div>
   );
 };
-
 const MessageList = ({ messages }) => {
   return (
     <div className="message-list">
@@ -156,8 +151,6 @@ const MessageList = ({ messages }) => {
     </div>
   )
 };
-
-
 const MeetingChat = ({ tollbarHeight }) => {
   const { publish, messages } = usePubSub("CHAT", {});
   const [message, setMessage] = useState("");
@@ -217,7 +210,6 @@ const MeetingChat = ({ tollbarHeight }) => {
     </div>
   );
 };
-
 const ParticipantView = ({ participantId }) => {
   const webcamRef = useRef(null);
   const micRef = useRef(null);
@@ -431,7 +423,6 @@ const ParticipantView = ({ participantId }) => {
     </div>
   );
 };
-
 const ParticipantsView = () => {
   const { participants } = useMeeting();
 
@@ -629,15 +620,17 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
   const handleStopRecording = () => {
     stopRecording();
   };
-
-
   const copyToClipboard = (e) => {
     navigator.clipboard.writeText(e.target.innerHTML);
+  }
+  const handleVisibilityChange = () => {
+    alert('You cannot swich between tabs until the meeting got over.');
   }
   
   const tollbarHeight = 120;
 
   return (
+    <PageVisibility onChange={handleVisibilityChange}>
     <div className="main-meeting-container">
 
       <div style={{ height: tollbarHeight }} className="controllers">
@@ -731,6 +724,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
         <MeetingChat tollbarHeight={tollbarHeight} />
       </div>
     </div>
+    </PageVisibility>
   );
 }
 
@@ -742,7 +736,8 @@ const App = () => {
   const [webcamOn, setWebcamOn] = useState(false);
   const [isMeetingStarted, setMeetingStarted] = useState(false);
 
-  return isMeetingStarted ? (
+  return (
+    isMeetingStarted ? (
       <MeetingProvider
         config={{
           meetingId,
@@ -769,23 +764,24 @@ const App = () => {
           }}
         />
       </MeetingProvider>
-  ) : (
-    <JoiningScreen
-      participantName={participantName}
-      setParticipantName={setParticipantName}
-      meetinId={meetingId}
-      setMeetingId={setMeetingId}
-      setToken={setToken}
-      setMicOn={setMicOn}
-      micOn={micOn}
-      webcamOn={webcamOn}
-      setWebcamOn={setWebcamOn}
-      onClickStartMeeting={() => {
-        setMeetingStarted(true);
-      }}
-      startMeeting={isMeetingStarted}
-    />
-  );
+    ) : (
+      <JoiningScreen
+        participantName={participantName}
+        setParticipantName={setParticipantName}
+        meetinId={meetingId}
+        setMeetingId={setMeetingId}
+        setToken={setToken}
+        setMicOn={setMicOn}
+        micOn={micOn}
+        webcamOn={webcamOn}
+        setWebcamOn={setWebcamOn}
+        onClickStartMeeting={() => {
+          setMeetingStarted(true);
+        }}
+        startMeeting={isMeetingStarted}
+      />
+    )
+  )
 };
 
 export default App;
