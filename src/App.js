@@ -1,18 +1,9 @@
-/* Built-in imports */
 import React, { useEffect, useRef, useState, useFullscreenStatus } from "react";
 
-/* External Imports */
-import {
-  MeetingProvider,
-  useMeeting,
-  useParticipant,
-  useConnection,
-  usePubSub,
-} from "@videosdk.live/react-sdk";
+import { MeetingProvider, useMeeting, useParticipant, useConnection, usePubSub } from "@videosdk.live/react-sdk";
 
 import PageVisibility from 'react-page-visibility';
 
-/* Internal Imports */
 import { getToken } from "./api";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
@@ -300,6 +291,7 @@ const ParticipantView = ({ participantId }) => {
 
   return (
     <div
+      className="single-participant-container"
       style={{
         width,
         overflow: "hidden",
@@ -436,7 +428,7 @@ const ParticipantsView = () => {
       }}
     >
       {chunk([...participants.keys()]).map((k) => (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex" }} className="participants-container">
           {k.map((l) => (
             <ParticipantView key={l} participantId={l} />
           ))}
@@ -635,7 +627,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
 
       <div style={{ height: tollbarHeight }} className="controllers">
 
-        <button className={"button red btn-controller"} onClick={leave}>
+        <button className={"button red btn-controller phone"} onClick={leave}>
           <i class="fa-solid fa-phone"></i>
         </button>
         
@@ -657,7 +649,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
           </button>
         </div>
 
-        <button className={"button blue btn-controller"} type="button" data-bs-toggle="offcanvas" data-bs-target="#chatBox" aria-controls="offcanvasRight">
+        <button className={"button blue btn-controller msg-btn"} type="button" data-bs-toggle="offcanvas" data-bs-target="#chatBox" aria-controls="offcanvasRight">
           <i class="fa-solid fa-message"></i>
         </button>
 

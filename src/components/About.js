@@ -23,7 +23,7 @@ const About = () => {
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-primary w-100 font-main">Nice!</button>
+            <button type="button" data-dismiss="modal" class="btn btn-secondary btn-primary w-100 font-main">Nice!</button>
           </div>
         </div>
       </div>
