@@ -11,7 +11,9 @@ import { JoiningScreen } from "./components/JoiningScreen";
 import { CodeEditor } from "./components/CodeEditor";
 import { DrawBoard } from "./components/DrawBoard";
 import AlertCopy from './components/alertCopy';
+import ShareButton from './components/ShareButton';
 import './App.css';
+
 
 const primary = "#3E84F6";
 
@@ -697,6 +699,7 @@ function MeetingView({ onNewMeetingIdToken, onMeetingLeave }) {
       className="font-main font-orange" 
       id="meetIDCopy">{meetingId}</span></h4>
       <AlertCopy/>
+      <ShareButton meetingID={meetingId}/>
       <div style={{ display: "flex", flex: 1 }}>
         <CodeEditor/>
         <DrawBoard/>

@@ -1,0 +1,30 @@
+.link-share{
+  display: inline-block;
+  position: fixed;
+  top: 1.5em;
+  right: 1.5em;
+}
+
+.social-container{
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.share-icon{
+  font-size: 25px;
+  color: var(--light-orange);
+}
+
+.orange{
+  color: var(--orange);
+}
+
+@media screen and (max-width: 400px ){
+  .link-share{
+    top: 70vh;
+    left: 1em;
+    font-size: 20px !important;
+  }
+}
