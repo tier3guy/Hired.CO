@@ -22,7 +22,7 @@ import './CSS/btnShare.css';
 
 const ShareButton = ({meetingID}) => {
 
-  const message = `Hey, your meeting link is ${meetingID}`;
+  const message = `Hey, your meeting link is ${meetingID}\n`;
   const url = 'https://hiredco.herokuapp.com';
   const title = 'Your interview is ready.';
   const hashtag = ['letsDoIt'];
